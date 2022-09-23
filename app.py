@@ -1,7 +1,8 @@
 from flask import Flask
 
 import random
-
+import requests
+import json
 from faker import Faker
 fake = Faker()
 
@@ -37,7 +38,16 @@ def requirements():  # put application's code here
 # ===
 # '''
 def generate_users():  # put application's code here
-    return (f'<p>{fake.first_name()} {fake.first_name()}@mail.com</p>' for _ in range(100))
+    users = random.randint(0, 100)
+    return (f'<p>{fake.first_name()} {fake.email()}</p>' for _ in range(100))
+
+@app.route('/space')
+
+def space():  # put application's code here
+    space_req = requests.get('http://api.open-notify.org/astros.json')
+    parse_req = json.loads(space_req.text)
+    return str(parse_req['number'])
+
 
 if __name__ == '__main__':
     app.run()
