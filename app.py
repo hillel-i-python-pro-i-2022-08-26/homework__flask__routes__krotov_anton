@@ -1,33 +1,36 @@
 from flask import Flask
 
-import random
 import requests
 import json
 from faker import Faker
+
 fake = Faker()
 
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route("/")
 def hello_world():  # put application's code here
-    return 'Hello World!'
+    return "Hello World!"
 
-@app.route('/requirements')
+
+@app.route("/requirements")
 # '''
 # Считывание файла
 # PATH: /requirements/
 # Возвращать содержимое файла. Любой текстовый файл.'''
 def requirements():  # put application's code here
-    text = open("C:\\Users\\Toxa\\PycharmProjects\\flaskProject\\files\\file.txt", 'rt')
+    text = open("C:\\Users\\Toxa\\PycharmProjects\\flaskProject\\files\\file.txt", "rt")
     return text.read()
 
-@app.route('/generate-users')
+
+@app.route("/generate-users")
 # '''
 # Сгенерировать данные пользователей и вывести на страницу.
 # Формат данных: "Vasya example@mail.com"
-# По умолчанию, пусть будет 100 пользователей. Добавить опциональный параметр, который регулирует количество пользователей.
+# По умолчанию, пусть будет 100 пользователей. Добавить опциональный параметр,
+# который регулирует количество пользователей.
 # Библиотека в помощь: faker
 #
 # Примечание:
@@ -38,16 +41,16 @@ def requirements():  # put application's code here
 # ===
 # '''
 def generate_users():  # put application's code here
-    users = random.randint(0, 100)
-    return (f'<p>{fake.first_name()} {fake.email()}</p>' for _ in range(100))
+    #    users = random.randint(0, 100)
+    return (f"<p>{fake.first_name()} {fake.email()}</p>" for _ in range(100))
 
-@app.route('/space')
 
+@app.route("/space")
 def space():  # put application's code here
-    space_req = requests.get('http://api.open-notify.org/astros.json')
+    space_req = requests.get("http://api.open-notify.org/astros.json")
     parse_req = json.loads(space_req.text)
-    return str(parse_req['number'])
+    return str(parse_req["number"])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
