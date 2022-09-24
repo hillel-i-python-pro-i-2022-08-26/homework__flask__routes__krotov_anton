@@ -21,7 +21,7 @@ def hello_world():  # put application's code here
 # PATH: /requirements/
 # Возвращать содержимое файла. Любой текстовый файл.'''
 def requirements():  # put application's code here
-    text = open("C:\\Users\\Toxa\\PycharmProjects\\flaskProject\\files\\file.txt", "rt")
+    text = open("/home/toxa/PycharmProjects/flaskProject/files/file.txt", "rt")
     return text.read()
 
 
